@@ -7,6 +7,7 @@ import { SecurityDashboard } from './components/SecurityDashboard';
 import { HistoricalData } from './components/HistoricalData';
 import { AlertPanel } from './components/AlertPanel';
 import { ThreatDetectionPanel } from './components/ThreatDetectionPanel';
+import { SettingsPanel } from './components/SettingsPanel';
 import { 
   generateGlucoseData, 
   mockInsulinPumpStatus, 
@@ -22,6 +23,8 @@ function App() {
   const [threats, setThreats] = useState<SecurityThreat[]>(mockSecurityThreats);
   const [alerts, setAlerts] = useState<Alert[]>(mockAlerts);
   const [isAlertPanelOpen, setIsAlertPanelOpen] = useState(false);
+  const [isSettingsPanelOpen, setIsSettingsPanelOpen] = useState(false);
+  const [showThreatDetection, setShowThreatDetection] = useState(false);
 
   // Initialize glucose data
   useEffect(() => {
@@ -156,6 +159,11 @@ function App() {
     setShowIntro(false);
   };
 
+  const handleOpenThreatAnalysis = () => {
+    setIsSettingsPanelOpen(false);
+    setShowThreatDetection(true);
+  };
+
   if (showIntro) {
     return <IntroAnimation onComplete={handleIntroComplete} />;
   }
@@ -167,7 +175,7 @@ function App() {
     <div className="min-h-screen bg-gray-50">
       <Header 
         activeAlerts={activeAlerts.length}
-        onSettingsClick={() => console.log('Settings clicked')}
+        onSettingsClick={() => setIsSettingsPanelOpen(true)}
         onAlertsClick={() => setIsAlertPanelOpen(true)}
       />
       
@@ -196,10 +204,12 @@ function App() {
           <HistoricalData data={glucoseData} />
         </div>
 
-        {/* AI Threat Detection Panel */}
-        <div className="mb-8">
-          <ThreatDetectionPanel onThreatDetected={handleThreatDetected} />
-        </div>
+        {/* AI Threat Detection Panel - Show conditionally */}
+        {showThreatDetection && (
+          <div className="mb-8">
+            <ThreatDetectionPanel onThreatDetected={handleThreatDetected} />
+          </div>
+        )}
       </main>
 
       <AlertPanel
@@ -207,6 +217,12 @@ function App() {
         isOpen={isAlertPanelOpen}
         onClose={() => setIsAlertPanelOpen(false)}
         onDismissAlert={handleDismissAlert}
+      />
+
+      <SettingsPanel
+        isOpen={isSettingsPanelOpen}
+        onClose={() => setIsSettingsPanelOpen(false)}
+        onOpenThreatAnalysis={handleOpenThreatAnalysis}
       />
     </div>
   );

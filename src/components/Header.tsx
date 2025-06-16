@@ -8,6 +8,16 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ activeAlerts, onSettingsClick, onAlertsClick }) => {
+  const handleSettingsClick = () => {
+    console.log('Header settings button clicked'); // Debug log
+    onSettingsClick();
+  };
+
+  const handleAlertsClick = () => {
+    console.log('Header alerts button clicked'); // Debug log
+    onAlertsClick();
+  };
+
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,8 +35,8 @@ export const Header: React.FC<HeaderProps> = ({ activeAlerts, onSettingsClick, o
           
           <div className="flex items-center space-x-4">
             <button
-              onClick={onAlertsClick}
-              className="relative p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
+              onClick={handleAlertsClick}
+              className="relative p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg transition-colors"
             >
               <Bell className="h-6 w-6" />
               {activeAlerts > 0 && (
@@ -37,8 +47,8 @@ export const Header: React.FC<HeaderProps> = ({ activeAlerts, onSettingsClick, o
             </button>
             
             <button
-              onClick={onSettingsClick}
-              className="p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
+              onClick={handleSettingsClick}
+              className="p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg transition-colors"
             >
               <Settings className="h-6 w-6" />
             </button>

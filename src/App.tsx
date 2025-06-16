@@ -164,6 +164,26 @@ function App() {
     setShowThreatDetection(true);
   };
 
+  const handleOpenSettings = () => {
+    console.log('Settings button clicked'); // Debug log
+    setIsSettingsPanelOpen(true);
+  };
+
+  const handleCloseSettings = () => {
+    console.log('Closing settings panel'); // Debug log
+    setIsSettingsPanelOpen(false);
+  };
+
+  const handleOpenAlerts = () => {
+    console.log('Alerts button clicked'); // Debug log
+    setIsAlertPanelOpen(true);
+  };
+
+  const handleCloseAlerts = () => {
+    console.log('Closing alerts panel'); // Debug log
+    setIsAlertPanelOpen(false);
+  };
+
   if (showIntro) {
     return <IntroAnimation onComplete={handleIntroComplete} />;
   }
@@ -175,8 +195,8 @@ function App() {
     <div className="min-h-screen bg-gray-50">
       <Header 
         activeAlerts={activeAlerts.length}
-        onSettingsClick={() => setIsSettingsPanelOpen(true)}
-        onAlertsClick={() => setIsAlertPanelOpen(true)}
+        onSettingsClick={handleOpenSettings}
+        onAlertsClick={handleOpenAlerts}
       />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -215,13 +235,13 @@ function App() {
       <AlertPanel
         alerts={alerts}
         isOpen={isAlertPanelOpen}
-        onClose={() => setIsAlertPanelOpen(false)}
+        onClose={handleCloseAlerts}
         onDismissAlert={handleDismissAlert}
       />
 
       <SettingsPanel
         isOpen={isSettingsPanelOpen}
-        onClose={() => setIsSettingsPanelOpen(false)}
+        onClose={handleCloseSettings}
         onOpenThreatAnalysis={handleOpenThreatAnalysis}
       />
     </div>

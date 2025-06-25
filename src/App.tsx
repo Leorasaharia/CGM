@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { IntroAnimation } from './components/IntroAnimation';
-import { Header } from './components/Header';
-import { GlucoseMonitor } from './components/GlucoseMonitor';
-import { InsulinPump } from './components/InsulinPump';
-import { SecurityDashboard } from './components/SecurityDashboard';
-import { HistoricalData } from './components/HistoricalData';
+import { useEffect, useState } from 'react';
 import { AlertPanel } from './components/AlertPanel';
-import { ThreatDetectionPanel } from './components/ThreatDetectionPanel';
+import { GlucoseMonitor } from './components/GlucoseMonitor';
+import { Header } from './components/Header';
+import { HistoricalData } from './components/HistoricalData';
+import { InsulinPump } from './components/InsulinPump';
+import { IntroAnimation } from './components/IntroAnimation';
+import { SecurityDashboard } from './components/SecurityDashboard';
 import { SettingsPanel } from './components/SettingsPanel';
-import { 
-  generateGlucoseData, 
-  mockInsulinPumpStatus, 
-  mockSecurityThreats, 
-  mockAlerts 
+import { ThreatDetectionPanel } from './components/ThreatDetectionPanel';
+import { Alert, GlucoseReading, InsulinPumpStatus, SecurityThreat } from './types';
+import {
+  generateGlucoseData,
+  mockAlerts,
+  mockInsulinPumpStatus,
+  mockSecurityThreats
 } from './utils/mockData';
-import { GlucoseReading, InsulinPumpStatus, SecurityThreat, Alert } from './types';
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);

@@ -64,7 +64,7 @@ export const Header: React.FC<HeaderProps> = ({ activeAlerts, onSettingsClick, o
 
             {/* Threat Detection Link */}
             <a
-              href="https://ann-lstm-ids.streamlit.app/"
+              href="https://modelbackend.streamlit.app/"
               target="_blank"
               rel="noopener noreferrer"
             >

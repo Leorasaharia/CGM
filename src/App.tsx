@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AlertPanel } from './components/AlertPanel';
 import { GlucoseMonitor } from "./components/GlucoseMonitor";
-
 import { Header } from './components/Header';
 import { HistoricalData } from './components/HistoricalData';
 import { InsulinPump } from './components/InsulinPump';

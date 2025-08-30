@@ -185,28 +185,30 @@ export const ThreatDetectionPanel: React.FC<ThreatDetectionPanelProps> = ({ onTh
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <div className="tidepool-card p-8">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
-          <Brain className="h-6 w-6 text-purple-600" />
-          <h2 className="text-xl font-semibold text-gray-900">AI Threat Detection</h2>
+          <div className="p-2 bg-purple-50 rounded-xl">
+            <Brain className="h-6 w-6 text-purple-600" />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 tracking-tight">AI Threat Detection</h2>
         </div>
         <div className="flex items-center space-x-2">
           <Zap className="h-5 w-5 text-yellow-500" />
-          <span className="text-sm font-medium text-gray-600">TensorFlow Lite</span>
+          <span className="text-sm font-semibold text-gray-700">TensorFlow Lite</span>
         </div>
       </div>
 
       {/* Model Status */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+      <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
         <div className="flex items-center space-x-3 mb-2">
           <Network className="h-5 w-5 text-blue-600" />
-          <h4 className="font-semibold text-blue-800">LightweightANN Model</h4>
+          <h4 className="font-bold text-blue-800 text-lg">LightweightANN Model</h4>
         </div>
-        <p className="text-sm text-blue-700 mb-2">
+        <p className="text-sm font-medium text-blue-700 mb-3">
           Architecture: 256→128→64→Classes | Trained on CIC IoMT 2024 Dataset
         </p>
-        <div className="flex items-center space-x-4 text-sm">
+        <div className="flex items-center space-x-4 text-sm font-medium">
           <span className="text-blue-600">✓ 45 Feature Analysis</span>
           <span className="text-blue-600">✓ Real-time Inference</span>
           <span className="text-blue-600">✓ 97% Accuracy</span>
@@ -215,7 +217,7 @@ export const ThreatDetectionPanel: React.FC<ThreatDetectionPanelProps> = ({ onTh
 
       {/* Sample Data Selection */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-base font-semibold text-gray-900 mb-4">
           Select Network Traffic Sample
         </label>
         <div className="grid grid-cols-3 gap-3">
@@ -223,10 +225,10 @@ export const ThreatDetectionPanel: React.FC<ThreatDetectionPanelProps> = ({ onTh
             <button
               key={sample}
               onClick={() => setSelectedSample(sample as keyof typeof SAMPLE_DATA)}
-              className={`p-3 rounded-lg border-2 text-sm font-medium transition-colors ${
+              className={`p-4 rounded-xl border-2 text-sm font-semibold transition-all duration-200 ${
                 selectedSample === sample
-                  ? 'border-purple-500 bg-purple-50 text-purple-700'
-                  : 'border-gray-200 bg-gray-50 text-gray-600 hover:border-gray-300'
+                  ? 'border-purple-500 bg-purple-50 text-purple-700 shadow-sm'
+                  : 'border-gray-200 bg-gray-50 text-gray-700 hover:border-gray-300 hover:bg-gray-100'
               }`}
             >
               {sample}
@@ -239,23 +241,23 @@ export const ThreatDetectionPanel: React.FC<ThreatDetectionPanelProps> = ({ onTh
       <div className="mb-6">
         <button
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="flex items-center space-x-2 text-sm text-gray-600 hover:text-gray-800"
+          className="flex items-center space-x-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
         >
           <BarChart3 className="h-4 w-4" />
           <span>{showAdvanced ? 'Hide' : 'Show'} Feature Details</span>
         </button>
         
         {showAdvanced && (
-          <div className="mt-3 bg-gray-50 rounded-lg p-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+          <div className="mt-4 bg-gray-50 rounded-xl p-6 border border-gray-100">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs font-medium">
               {Object.entries(SAMPLE_DATA[selectedSample]).slice(0, 12).map(([key, value]) => (
                 <div key={key} className="flex justify-between">
-                  <span className="text-gray-600">{key}:</span>
+                  <span className="text-gray-700">{key}:</span>
                   <span className="font-mono text-gray-900">{value}</span>
                 </div>
               ))}
             </div>
-            <p className="text-xs text-gray-500 mt-2">
+            <p className="text-xs font-medium text-gray-600 mt-3">
               Showing 12 of 45 features. Full feature set includes network metrics, TCP flags, protocols, and statistical analysis.
             </p>
           </div>
@@ -266,7 +268,7 @@ export const ThreatDetectionPanel: React.FC<ThreatDetectionPanelProps> = ({ onTh
       <button
         onClick={handleAnalyze}
         disabled={isAnalyzing}
-        className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
+        className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center space-x-2"
       >
         {isAnalyzing ? (
           <>
@@ -284,11 +286,11 @@ export const ThreatDetectionPanel: React.FC<ThreatDetectionPanelProps> = ({ onTh
       {/* Analysis Results */}
       {analysisResult && (
         <div className="mt-6 space-y-4">
-          <div className="border-t border-gray-200 pt-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Analysis Results</h3>
+          <div className="border-t border-gray-200 pt-6">
+            <h3 className="text-xl font-bold text-gray-900 mb-6 tracking-tight">Analysis Results</h3>
             
             {/* Classification Result */}
-            <div className={`rounded-lg border-2 p-4 ${getRiskColor(analysisResult.riskLevel)}`}>
+            <div className={`rounded-xl border-2 p-6 ${getRiskColor(analysisResult.riskLevel)} transition-all duration-300`}>
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-2">
                   {analysisResult.classification === 'Benign' ? (
@@ -296,54 +298,54 @@ export const ThreatDetectionPanel: React.FC<ThreatDetectionPanelProps> = ({ onTh
                   ) : (
                     <AlertTriangle className="h-6 w-6 text-red-600" />
                   )}
-                  <h4 className="font-semibold text-lg">
+                  <h4 className="font-bold text-xl tracking-tight">
                     {analysisResult.classification} Traffic
                   </h4>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-medium">Confidence</p>
-                  <p className="text-xl font-bold">{(analysisResult.confidence * 100).toFixed(1)}%</p>
+                  <p className="text-sm font-semibold text-gray-700">Confidence</p>
+                  <p className="text-2xl font-bold tracking-tight">{(analysisResult.confidence * 100).toFixed(1)}%</p>
                 </div>
               </div>
               
               <div className="grid grid-cols-2 gap-4 mt-4">
                 <div>
-                  <p className="text-sm font-medium">Risk Level</p>
-                  <p className="text-lg font-semibold">{analysisResult.riskLevel}</p>
+                  <p className="text-sm font-semibold text-gray-700">Risk Level</p>
+                  <p className="text-lg font-bold">{analysisResult.riskLevel}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium">Threat Type</p>
-                  <p className="text-lg font-semibold">{analysisResult.threatType}</p>
+                  <p className="text-sm font-semibold text-gray-700">Threat Type</p>
+                  <p className="text-lg font-bold">{analysisResult.threatType}</p>
                 </div>
               </div>
             </div>
 
             {/* Recommendations */}
-            <div className="bg-gray-50 rounded-lg p-4">
-              <h4 className="font-semibold text-gray-900 mb-3">Security Recommendations</h4>
+            <div className="bg-gray-50 rounded-xl p-6 border border-gray-100">
+              <h4 className="font-bold text-gray-900 mb-4 text-lg">Security Recommendations</h4>
               <ul className="space-y-2">
                 {analysisResult.recommendations.map((rec: string, index: number) => (
-                  <li key={index} className="flex items-start space-x-2 text-sm">
+                  <li key={index} className="flex items-start space-x-2 text-sm font-medium">
                     <span className="text-purple-600 mt-1">•</span>
-                    <span className="text-gray-700">{rec}</span>
+                    <span className="text-gray-800">{rec}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
             {/* Confidence Visualization */}
-            <div className="bg-white border border-gray-200 rounded-lg p-4">
-              <h4 className="font-semibold text-gray-900 mb-3">Model Confidence</h4>
-              <div className="w-full bg-gray-200 rounded-full h-3">
+            <div className="bg-white border border-gray-200 rounded-xl p-6">
+              <h4 className="font-bold text-gray-900 mb-4 text-lg">Model Confidence</h4>
+              <div className="w-full bg-gray-200 rounded-full h-4 shadow-inner">
                 <div 
-                  className={`h-3 rounded-full transition-all duration-1000 ${
+                  className={`h-4 rounded-full transition-all duration-1000 shadow-sm ${
                     analysisResult.confidence >= 0.8 ? 'bg-green-500' :
                     analysisResult.confidence >= 0.6 ? 'bg-yellow-500' : 'bg-red-500'
                   }`}
                   style={{ width: `${analysisResult.confidence * 100}%` }}
                 ></div>
               </div>
-              <p className="text-xs text-gray-500 mt-2">
+              <p className="text-xs font-medium text-gray-600 mt-3">
                 {analysisResult.confidence >= 0.8 ? 'High confidence prediction' :
                  analysisResult.confidence >= 0.6 ? 'Medium confidence prediction' : 'Low confidence prediction'}
               </p>

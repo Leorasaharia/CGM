@@ -19,19 +19,23 @@ export const Header: React.FC<HeaderProps> = ({ activeAlerts, onSettingsClick, o
   };
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
+    <header className="bg-white shadow-sm border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
         
           {/* Left logo/title */}
           <div className="flex items-center space-x-3">
             <div className="flex items-center space-x-2">
-              <Shield className="h-8 w-8 text-blue-600" />
-              <Activity className="h-8 w-8 text-green-600" />
+              <div className="p-2 bg-blue-50 rounded-xl">
+                <Shield className="h-6 w-6 text-blue-600" />
+              </div>
+              <div className="p-2 bg-green-50 rounded-xl">
+                <Activity className="h-6 w-6 text-green-600" />
+              </div>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">SecureGluco</h1>
-              <p className="text-sm text-gray-500">Diabetes Management Dashboard</p>
+              <h1 className="text-2xl font-bold text-gray-900 tracking-tight">SecureGluco</h1>
+              <p className="text-sm text-gray-600 font-medium">Diabetes Management Dashboard</p>
             </div>
           </div>
 
@@ -40,11 +44,11 @@ export const Header: React.FC<HeaderProps> = ({ activeAlerts, onSettingsClick, o
             {/* Alerts */}
             <button
               onClick={handleAlertsClick}
-              className="relative p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg transition-colors"
+              className="relative p-3 text-gray-500 hover:text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl transition-all duration-200"
             >
               <Bell className="h-6 w-6" />
               {activeAlerts > 0 && (
-                <span className="absolute -top-1 -right-1 h-5 w-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 h-5 w-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-medium">
                   {activeAlerts}
                 </span>
               )}
@@ -53,7 +57,7 @@ export const Header: React.FC<HeaderProps> = ({ activeAlerts, onSettingsClick, o
             {/* Settings */}
             <button
               onClick={handleSettingsClick}
-              className="p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg transition-colors"
+              className="p-3 text-gray-500 hover:text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl transition-all duration-200"
             >
               <Settings className="h-6 w-6" />
             </button>
@@ -64,7 +68,7 @@ export const Header: React.FC<HeaderProps> = ({ activeAlerts, onSettingsClick, o
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-1 px-3 rounded-lg transition-colors">
+              <button className="tidepool-button-primary text-sm">
                 Threat Detection
               </button>
             </a>
@@ -72,11 +76,11 @@ export const Header: React.FC<HeaderProps> = ({ activeAlerts, onSettingsClick, o
             {/* Profile */}
             <div className="flex items-center space-x-3">
               <div className="text-right">
-                <p className="text-sm font-medium text-gray-900">Patient Dashboard</p>
-                <p className="text-xs text-gray-500">Last sync: 2 min ago</p>
+                <p className="text-sm font-semibold text-gray-900">Patient Dashboard</p>
+                <p className="text-xs text-gray-600">Last sync: 2 min ago</p>
               </div>
-              <div className="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center">
-                <span className="text-sm font-medium text-blue-600">P</span>
+              <div className="h-10 w-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-sm">
+                <span className="text-sm font-semibold text-white">P</span>
               </div>
             </div>
           </div>

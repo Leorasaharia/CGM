@@ -44,36 +44,38 @@ export const GlucoseMonitor: React.FC<GlucoseMonitorProps> = ({ currentReading, 
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <div className="tidepool-card p-8">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
-          <Droplets className="h-6 w-6 text-blue-600" />
-          <h2 className="text-xl font-semibold text-gray-900">Glucose Monitor</h2>
+          <div className="p-2 bg-blue-50 rounded-xl">
+            <Droplets className="h-6 w-6 text-blue-600" />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Glucose Monitor</h2>
         </div>
         <div className="text-right">
-          <p className="text-sm text-gray-500">Last reading</p>
-          <p className="text-sm font-medium text-gray-900">
+          <p className="text-sm font-medium text-gray-600">Last reading</p>
+          <p className="text-sm font-semibold text-gray-900">
             {formatTime(currentReading.timestamp)}
           </p>
         </div>
       </div>
 
       {/* Current Reading Display */}
-      <div className={`rounded-lg border-2 p-6 mb-6 ${getGlucoseBgColor(currentReading.value)}`}>
+      <div className={`rounded-2xl border-2 p-8 mb-8 ${getGlucoseBgColor(currentReading.value)} transition-all duration-300`}>
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm font-medium text-gray-600 mb-1">Current Glucose</p>
+            <p className="text-base font-semibold text-gray-700 mb-2">Current Glucose</p>
             <div className="flex items-center space-x-3">
-              <span className={`text-4xl font-bold ${getGlucoseColor(currentReading.value)}`}>
+              <span className={`text-5xl font-bold ${getGlucoseColor(currentReading.value)} tracking-tight`}>
                 {currentReading.value}
               </span>
-              <span className="text-lg text-gray-500">mg/dL</span>
+              <span className="text-xl font-medium text-gray-600">mg/dL</span>
               {getTrendIcon(currentReading.trend)}
             </div>
           </div>
           <div className="text-right">
-            <p className="text-sm font-medium text-gray-600 mb-1">Status</p>
-            <p className={`text-sm font-semibold ${getGlucoseColor(currentReading.value)}`}>
+            <p className="text-base font-semibold text-gray-700 mb-2">Status</p>
+            <p className={`text-lg font-bold ${getGlucoseColor(currentReading.value)}`}>
               {currentReading.value < 70 ? 'Low' : 
                currentReading.value > 180 ? 'High' : 'In Range'}
             </p>
@@ -82,47 +84,47 @@ export const GlucoseMonitor: React.FC<GlucoseMonitorProps> = ({ currentReading, 
       </div>
 
       {/* Glucose Chart */}
-      <div className="h-64">
+      <div className="h-80 mb-6">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+            <CartesianGrid strokeDasharray="2 2" stroke="#e2e8f0" />
             <XAxis 
               dataKey="time" 
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 12, fill: '#64748b' }}
               interval="preserveStartEnd"
             />
             <YAxis 
               domain={['dataMin - 20', 'dataMax + 20']}
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 12, fill: '#64748b' }}
             />
-            <ReferenceLine y={70} stroke="#ef4444" strokeDasharray="5 5" label="Low" />
-            <ReferenceLine y={180} stroke="#f59e0b" strokeDasharray="5 5" label="High" />
+            <ReferenceLine y={70} stroke="#ef4444" strokeDasharray="4 4" strokeWidth={2} />
+            <ReferenceLine y={180} stroke="#f59e0b" strokeDasharray="4 4" strokeWidth={2} />
             <Tooltip content={<CustomTooltip />} />
             <Line 
               type="monotone" 
               dataKey="value" 
-              stroke="#2563eb" 
-              strokeWidth={3}
-              dot={{ fill: '#2563eb', strokeWidth: 2, r: 4 }}
-              activeDot={{ r: 6, stroke: '#2563eb', strokeWidth: 2 }}
+              stroke="#3b82f6" 
+              strokeWidth={4}
+              dot={{ fill: '#3b82f6', strokeWidth: 0, r: 5 }}
+              activeDot={{ r: 8, stroke: '#3b82f6', strokeWidth: 3, fill: '#ffffff' }}
             />
           </LineChart>
         </ResponsiveContainer>
       </div>
 
       {/* Range Indicators */}
-      <div className="flex justify-between mt-4 text-xs">
+      <div className="flex justify-between text-sm font-medium">
         <div className="flex items-center space-x-2">
-          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-          <span className="text-gray-600">Critical (&lt;70, &gt;250)</span>
+          <div className="w-4 h-4 bg-red-500 rounded-full shadow-sm"></div>
+          <span className="text-gray-700">Critical (<70, >250)</span>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-          <span className="text-gray-600">Caution (70-180, 180-250)</span>
+          <div className="w-4 h-4 bg-yellow-500 rounded-full shadow-sm"></div>
+          <span className="text-gray-700">Caution (70-180, 180-250)</span>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-          <span className="text-gray-600">In Range (70-180)</span>
+          <div className="w-4 h-4 bg-green-500 rounded-full shadow-sm"></div>
+          <span className="text-gray-700">In Range (70-180)</span>
         </div>
       </div>
     </div>

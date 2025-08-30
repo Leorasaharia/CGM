@@ -7,7 +7,7 @@ const errorData = {
   isRetryable: true,
 };
 
-export default function GlucoseMonitor() {
+export function GlucoseMonitor() {
   return (
     <div>
       <h2>{errorData.code}</h2>
